@@ -1,4 +1,5 @@
 using CodeCool.EhotelBuffet.Guests.Model;
+using CodeCool.EhotelBuffet.Menu.Model;
 
 namespace CodeCool.EhotelBuffet.Guests.Service;
 
@@ -7,21 +8,34 @@ public class GuestGroupProvider: IGuestGroupProvider
     
     public IEnumerable<GuestGroup> SplitGuestsIntoGroups(IEnumerable<Guest> guests, int groupCount, int maxGuestPerGroup)
     {
-        var random = new Random();
         var randomGroups = new List<GuestGroup>();
-        int randomgroupCount = random.Next(0, groupCount);
         int id = 0;
-        for (int i = 0; i < randomgroupCount; i++)
+        var guestsToArray = guests as Guest[] ?? guests.ToArray();
+        
+        for (int i = 0; i < groupCount; i++)
         {
-            randomGroups.Add(new GuestGroup(id++, GenerateRandomGuests(guests, maxGuestPerGroup)));
+            if (guestsToArray.Length == guests.Count())
+            {
+                var generateRandomGroup = GenerateRandomGuests(guests, maxGuestPerGroup);
+                randomGroups.Add(new GuestGroup(id++, generateRandomGroup));
+            }
+            else
+            {
+                var generateRandomGroup = GenerateRandomGuests(guestsToArray, maxGuestPerGroup);
+                generateRandomGroup =  generateRandomGroup as Guest[] ?? generateRandomGroup.ToArray();
+                guestsToArray = guestsToArray.Where(val =>
+                {
+                    return val != generateRandomGroup;
+                }).ToArray(); 
+            }
         }
         GuestGroup[] arrayOfGuests = randomGroups.ToArray();
-        foreach (var (i, j) in arrayOfGuests)
+        foreach (var arrayOfGuest in arrayOfGuests)
         {
-            Console.WriteLine(i);
-            foreach (var x in j)
+            Console.WriteLine(arrayOfGuest.Id);
+            foreach (var guest in arrayOfGuest.Guests)
             {
-                Console.WriteLine(x);
+                Console.WriteLine(guest);
             }
         }
         return arrayOfGuests;
@@ -39,8 +53,8 @@ public class GuestGroupProvider: IGuestGroupProvider
             if (!randomGuests.Contains(randomGuest))
             {
                 randomGuests.Add(randomGuest);
+                guestsToArray = guestsToArray.Where(val => val != randomGuest).ToArray();
             }
-            
         }
         Guest[] arrayOfGuests = randomGuests.ToArray();
         return arrayOfGuests;
