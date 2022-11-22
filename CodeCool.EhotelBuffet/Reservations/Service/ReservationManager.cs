@@ -5,18 +5,34 @@ namespace CodeCool.EhotelBuffet.Reservations.Service;
 
 public class ReservationManager : IReservationManager
 {
+    private List<Reservation> _guests;
+
+    public ReservationManager()
+    {
+        _guests = new List<Reservation>();
+    }
     public void AddReservation(Reservation reservation)
     {
-        throw new NotImplementedException();
+        _guests.Add(reservation);
     }
 
     public IEnumerable<Guest> GetGuestsForDate(DateTime date)
     {
-        throw new NotImplementedException();
+        List<Guest> guestsOnDate = new List<Guest>();
+
+        foreach (var reservation in _guests)
+        {
+            if (reservation.Start <= date && reservation.End >= date)
+            {
+                guestsOnDate.Add(reservation.Guest);
+            }
+        }
+
+        return guestsOnDate;
     }
 
     public IEnumerable<Reservation> GetAll()
     {
-        throw new NotImplementedException();
+        return _guests;
     }
 }
