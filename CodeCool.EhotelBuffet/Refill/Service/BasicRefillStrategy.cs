@@ -1,4 +1,5 @@
-﻿using CodeCool.EhotelBuffet.Menu.Model;
+﻿using System.Diagnostics.Metrics;
+using CodeCool.EhotelBuffet.Menu.Model;
 
 namespace CodeCool.EhotelBuffet.Refill.Service;
 
@@ -19,7 +20,20 @@ public class BasicRefillStrategy : IRefillStrategy
 
     public Dictionary<MenuItem, int> GetRefillQuantities(IEnumerable<Portion> currentPortions)
     {
-        return null;
+        var enumerable = currentPortions.ToList();
+        var needRefill = new Dictionary<MenuItem, int>();
+        
+        foreach (var x in enumerable)
+        {
+            if (enumerable.Count(portion => portion.MenuItem.MealType == x.MenuItem.MealType) < 3)
+            {
+                needRefill.Add(x.MenuItem,
+                    (OptimalPortionCount -
+                     enumerable.Count(portion => portion.MenuItem.MealType == x.MenuItem.MealType)));
+            }
+        }
+
+        return needRefill;
     }
 
 }

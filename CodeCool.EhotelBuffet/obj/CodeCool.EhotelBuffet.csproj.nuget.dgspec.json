@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\attil\\Projects\\OOP\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj": {}
+    "C:\\Users\\Dorian\\Documents\\Codecool\\OOP C#\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj": {}
   },
   "projects": {
-    "C:\\Users\\attil\\Projects\\OOP\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj": {
+    "C:\\Users\\Dorian\\Documents\\Codecool\\OOP C#\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\attil\\Projects\\OOP\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj",
+        "projectUniqueName": "C:\\Users\\Dorian\\Documents\\Codecool\\OOP C#\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj",
         "projectName": "CodeCool.EhotelBuffet",
-        "projectPath": "C:\\Users\\attil\\Projects\\OOP\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj",
-        "packagesPath": "C:\\Users\\attil\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\attil\\Projects\\OOP\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\obj\\",
+        "projectPath": "C:\\Users\\Dorian\\Documents\\Codecool\\OOP C#\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj",
+        "packagesPath": "C:\\Users\\Dorian\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dorian\\Documents\\Codecool\\OOP C#\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\attil\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Dorian\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"

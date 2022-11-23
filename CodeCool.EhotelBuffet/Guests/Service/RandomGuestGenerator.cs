@@ -2,7 +2,7 @@
 
 namespace CodeCool.EhotelBuffet.Guests.Service;
 
-public class RandomGuestGenerator
+public class RandomGuestGenerator : IGuestProvider
 {
     private static readonly Random Random = new();
 
@@ -18,6 +18,7 @@ public class RandomGuestGenerator
     {
         for (int i = 0; i < quantity; i++)
         {
+             
             yield return GenerateRandomGuest();
         }
     }
@@ -29,11 +30,14 @@ public class RandomGuestGenerator
 
     private static string GetRandomName()
     {
-        return null;
+        string randomName = Names[Random.Next(Names.Length)];
+        return randomName;
     }
 
     private static GuestType GetRandomType()
     {
-        return 0;
+        Array values = Enum.GetValues(typeof(GuestType));
+        GuestType randomType = (GuestType)values.GetValue(Random.Next(values.Length));
+        return randomType;
     }
 }
