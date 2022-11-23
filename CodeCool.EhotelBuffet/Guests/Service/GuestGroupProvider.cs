@@ -26,7 +26,7 @@ public class GuestGroupProvider: IGuestGroupProvider
                 guestsToArray = guestsToArray.Where(val =>
                 {
                     return val != generateRandomGroup;
-                }).ToArray(); 
+                }).ToArray();
             }
         }
         GuestGroup[] arrayOfGuests = randomGroups.ToArray();

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dorian\\Documents\\Codecool\\OOP C#\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj": {}
+    "C:\\Users\\Lili\\RiderProjects\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dorian\\Documents\\Codecool\\OOP C#\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj": {
+    "C:\\Users\\Lili\\RiderProjects\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dorian\\Documents\\Codecool\\OOP C#\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj",
+        "projectUniqueName": "C:\\Users\\Lili\\RiderProjects\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj",
         "projectName": "CodeCool.EhotelBuffet",
-        "projectPath": "C:\\Users\\Dorian\\Documents\\Codecool\\OOP C#\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj",
-        "packagesPath": "C:\\Users\\Dorian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dorian\\Documents\\Codecool\\OOP C#\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\obj\\",
+        "projectPath": "C:\\Users\\Lili\\RiderProjects\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\CodeCool.EhotelBuffet.csproj",
+        "packagesPath": "C:\\Users\\Lili\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Lili\\RiderProjects\\ehotel-buffet-csharp-dorian-sz\\CodeCool.EhotelBuffet\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Dorian\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Lili\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
