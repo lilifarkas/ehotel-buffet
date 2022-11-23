@@ -46,8 +46,8 @@ public class GuestGroupProvider: IGuestGroupProvider
         var random = new Random();
         var guestsToArray = guests as Guest[] ?? guests.ToArray();
         var randomGuests = new List<Guest>();
-        
-        for (int i = 0; i < max; i++)
+        var randomNumberGuestsPerGroup = random.Next(1, max);
+        for (int i = 0; i < randomNumberGuestsPerGroup; i++)
         {
             var randomGuest = guestsToArray[random.Next(guestsToArray.Length)];
             if (!randomGuests.Contains(randomGuest))
