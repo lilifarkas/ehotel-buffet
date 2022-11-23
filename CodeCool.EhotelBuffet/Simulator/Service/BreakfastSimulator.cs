@@ -36,6 +36,10 @@ public class BreakfastSimulator : IDiningSimulator
 
     public DiningSimulationResults Run(DiningSimulatorConfig config)
     {
+        ResetState();
+        DateTime currentTime = config.Start;
+        IEnumerable<Guest> guests = _reservationManager.GetGuestsForDate(currentTime);
+        
         return null;
     }
 

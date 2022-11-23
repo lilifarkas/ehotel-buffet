@@ -9,7 +9,7 @@ public class ReservationProvider : IReservationProvider
     {
         Random rnd = new Random();
         //Generate a random start stay date
-        int stayStartDate = rnd.Next(seasonStart.Day, seasonEnd.Day - 1);
+        int stayStartDate = rnd.Next(seasonStart.Day, seasonEnd.Day);
         //Generate random stay length, stayStartDate + stayLength can't exceed seasonEnd.
         int stayLength = rnd.Next(1, seasonEnd.Day - stayStartDate);
         

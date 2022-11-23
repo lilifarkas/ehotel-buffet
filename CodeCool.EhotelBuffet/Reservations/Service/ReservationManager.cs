@@ -20,7 +20,7 @@ public class ReservationManager : IReservationManager
     {
         List<Guest> guestsOnDate = new List<Guest>();
 
-        //Find guests whose at a given date
+        //Find guests whose stay is at the given date
         foreach (var reservation in _guests)
         {
             if (reservation.Start <= date && reservation.End >= date)
