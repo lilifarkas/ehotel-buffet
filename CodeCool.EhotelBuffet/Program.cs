@@ -8,27 +8,18 @@ using CodeCool.EhotelBuffet.Reservations.Service;
 using CodeCool.EhotelBuffet.Simulator.Service;
 using CodeCool.EhotelBuffet.Ui;
 
-// ITimeService timeService = new TimeService();
- IMenuProvider menuProvider = new MenuProvider();
- IRefillService refillService = new RefillService();
-// IGuestGroupProvider guestGroupProvider = null;
-// IReservationProvider reservationProvider = null;
-// IReservationManager reservationManager = null;
-//
+ITimeService timeService = new TimeService();
+IMenuProvider menuProvider = new MenuProvider();
+IRefillService refillService = new RefillService();
+IGuestGroupProvider guestGroupProvider = new GuestGroupProvider();
+IReservationProvider reservationProvider = new ReservationProvider();
+IReservationManager reservationManager = new ReservationManager();
+
  IBuffetService buffetService = new BuffetService(menuProvider, refillService);
-// IDiningSimulator diningSimulator =
-//     new BreakfastSimulator(buffetService, reservationManager, guestGroupProvider, timeService);
-//
-// EhoteBuffetUi ui = new EhoteBuffetUi(reservationProvider, reservationManager, diningSimulator);
-//
-// ui.Run();
- IRefillStrategy basicRefillStrategy = new BasicRefillStrategy();
-buffetService.Refill(basicRefillStrategy);
- 
- DateTime date = DateTime.Now;
- DateTime newDate = date.AddMinutes(35);
- buffetService.Consume(MealType.Cereal);
+IDiningSimulator diningSimulator =
+    new BreakfastSimulator(buffetService, reservationManager, guestGroupProvider, timeService);
 
+EhoteBuffetUi ui = new EhoteBuffetUi(reservationProvider, reservationManager, diningSimulator);
 
- buffetService.Refill(basicRefillStrategy);
+ui.Run();
  

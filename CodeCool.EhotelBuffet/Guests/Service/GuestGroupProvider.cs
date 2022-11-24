@@ -30,14 +30,6 @@ public class GuestGroupProvider: IGuestGroupProvider
             }
         }
         GuestGroup[] arrayOfGuests = randomGroups.ToArray();
-        foreach (var arrayOfGuest in arrayOfGuests)
-        {
-            Console.WriteLine(arrayOfGuest.Id);
-            foreach (var guest in arrayOfGuest.Guests)
-            {
-                Console.WriteLine(guest);
-            }
-        }
         return arrayOfGuests;
     }
 
