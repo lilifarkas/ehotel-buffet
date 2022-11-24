@@ -1,4 +1,5 @@
-﻿using CodeCool.EhotelBuffet.Guests.Model;
+﻿using System.Collections;
+using CodeCool.EhotelBuffet.Guests.Model;
 
 namespace CodeCool.EhotelBuffet.Guests.Service;
 
@@ -16,11 +17,16 @@ public class RandomGuestGenerator : IGuestProvider
 
     public IEnumerable<Guest> Provide(int quantity)
     {
+        var randomGuests = new List<Guest>();
         for (int i = 0; i < quantity; i++)
         {
-             
-            yield return GenerateRandomGuest();
+            if (!randomGuests.Contains(GenerateRandomGuest()))
+            {
+                randomGuests.Add(GenerateRandomGuest());
+            }
         }
+
+        return randomGuests;
     }
 
     private static Guest GenerateRandomGuest()
@@ -37,7 +43,7 @@ public class RandomGuestGenerator : IGuestProvider
     private static GuestType GetRandomType()
     {
         Array values = Enum.GetValues(typeof(GuestType));
-        GuestType randomType = (GuestType)values.GetValue(Random.Next(values.Length));
+        GuestType randomType = (GuestType)(values.GetValue(Random.Next(values.Length)) ?? typeof(GuestType));
         return randomType;
     }
 }

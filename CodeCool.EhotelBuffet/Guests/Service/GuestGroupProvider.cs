@@ -11,7 +11,7 @@ public class GuestGroupProvider: IGuestGroupProvider
         var randomGroups = new List<GuestGroup>();
         int id = 0;
         var guestsToArray = guests as Guest[] ?? guests.ToArray();
-        
+         // Generate random groups with random guests
         for (int i = 0; i < groupCount; i++)
         {
             if (guestsToArray.Length == guests.Count())
@@ -30,19 +30,13 @@ public class GuestGroupProvider: IGuestGroupProvider
             }
         }
         GuestGroup[] arrayOfGuests = randomGroups.ToArray();
-        foreach (var arrayOfGuest in arrayOfGuests)
-        {
-            Console.WriteLine(arrayOfGuest.Id);
-            foreach (var guest in arrayOfGuest.Guests)
-            {
-                Console.WriteLine(guest);
-            }
-        }
+        
         return arrayOfGuests;
     }
 
     private IEnumerable<Guest> GenerateRandomGuests( IEnumerable<Guest> guests, int max)
     {
+         // Generate random guests fot the groups
         var random = new Random();
         var guestsToArray = guests as Guest[] ?? guests.ToArray();
         var randomGuests = new List<Guest>();

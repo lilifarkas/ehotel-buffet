@@ -10,28 +10,36 @@ public class EhoteBuffetUi
 {
     private readonly IReservationManager _reservationManager;
     private readonly IDiningSimulator _diningSimulator;
-
+    private readonly IGuestProvider _guestProvider;
     private readonly IReservationProvider _reservationProvider;
 
     public EhoteBuffetUi(
         IReservationProvider reservationProvider,
         IReservationManager reservationManager,
-        IDiningSimulator diningSimulator)
+        IDiningSimulator diningSimulator,
+        IGuestProvider guestProvider)
     {
         _reservationProvider = reservationProvider;
         _reservationManager = reservationManager;
         _diningSimulator = diningSimulator;
+        _guestProvider = guestProvider;
     }
 
     public void Run()
     {
+        Console.WriteLine("Welcome to the Best Hotel And Buffet!");
+        Console.ReadLine();
         int guestCount = 20;
         DateTime seasonStart = DateTime.Today;
         DateTime seasonEnd = DateTime.Today.AddDays(3);
-
-        var guests = GetGuests();
+        Console.WriteLine("Guests:");
+        var guests = GetGuests(guestCount);
+        foreach (var guest in guests)
+        {
+            Console.WriteLine(guest);
+        }
         CreateReservations(guests, seasonStart, seasonEnd);
-
+        Console.WriteLine("Reservations:");
         PrintGuestsWithReservations();
 
         var currentDate = seasonStart;
@@ -52,17 +60,33 @@ public class EhoteBuffetUi
         Console.ReadLine();
     }
 
-    private IEnumerable<Guest> GetGuests()
+    private IEnumerable<Guest> GetGuests(int guestCount)
     {
-        return null;
+        return _guestProvider.Provide(guestCount);
     }
 
     private void CreateReservations(IEnumerable<Guest> guests, DateTime seasonStart, DateTime seasonEnd)
     {
+        foreach (var guest in guests)
+        {
+            _reservationManager.AddReservation(_reservationProvider.Provide(guest, seasonStart, seasonEnd));
+        }
     }
 
     private void PrintGuestsWithReservations()
     {
+        foreach (var reservation in _reservationManager.GetAll())
+        {
+            Console.WriteLine($"{reservation.Guest.Name} - " +
+                              $"Start: " +
+                              $"{reservation.Start}, " +
+                              $"End: " +
+                              $"{reservation.End}, " +
+                              $"Guest Type: " +
+                              $"{reservation.Guest.GuestType}");
+
+        }
+        
     }
 
     private static void PrintSimulationResults(DiningSimulationResults results)
