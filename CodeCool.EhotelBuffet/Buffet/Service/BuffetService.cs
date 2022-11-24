@@ -80,6 +80,13 @@ public class BuffetService : IBuffetService
         
     }
 
+    public void GetPortions()
+    {
+        foreach (var currentPortion in _currentPortions)
+        {
+            Console.WriteLine(currentPortion);
+        }
+    }
 
     public int CollectWaste(MealDurability mealDurability, DateTime currentDate)
     {

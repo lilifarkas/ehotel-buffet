@@ -11,7 +11,7 @@ public class RefillService : IRefillService
         {
             for (int i = 0; i < quantity; i++)
             {
-                newPortions.Add(new Portion(item, DateTime.Now));
+                newPortions.Add(new Portion(item, DateTime.Now.AddDays(-1)));
             }
         }
         

@@ -46,8 +46,6 @@ public class BreakfastSimulator : IDiningSimulator
         var enumerable = guests as Guest[] ?? guests.ToArray();
         int maxGuestsPerGrp = enumerable.Count() / config.MinimumGroupCount;
         var guestGroups = _guestGroupProvider.SplitGuestsIntoGroups(enumerable, config.MinimumGroupCount, maxGuestsPerGrp);
-        
-        
         foreach (var guestGroup in guestGroups)
         {
             _buffetService.Refill(refillStrategy);
@@ -69,19 +67,18 @@ public class BreakfastSimulator : IDiningSimulator
                         if (!_unhappyGuests.Contains(guestGroupGuest))
                         {
                             _unhappyGuests.Add(guestGroupGuest);
+                            _happyGuests.Remove(guestGroupGuest);
                         }
                     }
                 }
-                
             }
-                _timeService.IncreaseCurrentTime(config.CycleLengthInMinutes);
-                _foodWasteCost += _buffetService.CollectWaste(MealDurability.Short, _timeService.GetCurrentTime());
-                _foodWasteCost += _buffetService.CollectWaste(MealDurability.Medium, _timeService.GetCurrentTime());
-                _foodWasteCost += _buffetService.CollectWaste(MealDurability.Long, _timeService.GetCurrentTime());
+            _timeService.IncreaseCurrentTime(config.CycleLengthInMinutes);
+            _foodWasteCost += _buffetService.CollectWaste(MealDurability.Short, _timeService.GetCurrentTime());
+            _foodWasteCost += _buffetService.CollectWaste(MealDurability.Medium, _timeService.GetCurrentTime());
+            _foodWasteCost += _buffetService.CollectWaste(MealDurability.Long, _timeService.GetCurrentTime());
         }
-        Console.WriteLine(_foodWasteCost);
         int waste = _foodWasteCost;
-        return new DiningSimulationResults(currentTime, enumerable.Count(), waste, _happyGuests, _unhappyGuests);
+        return new DiningSimulationResults(currentTime, maxGuestsPerGrp * guestGroups.Count(), waste, _happyGuests, _unhappyGuests);
     }
 
     private void ResetState()

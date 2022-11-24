@@ -96,5 +96,7 @@ public class EhoteBuffetUi
         Console.WriteLine($"Date: {results.Date}");
         Console.WriteLine($"Total Guests: {results.TotalGuests}");
         Console.WriteLine($"Food waste cost: {results.FoodWasteCost}");
+        Console.WriteLine($"Happy guests: {results.HappyGuests.Count()}");
+        Console.WriteLine($"Unhappy guests: {results.UnhappyGuests.Count()}");
     }
 }
