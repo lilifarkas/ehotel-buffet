@@ -92,5 +92,9 @@ public class EhoteBuffetUi
 
     private static void PrintSimulationResults(DiningSimulationResults results)
     {
+        Console.WriteLine("-----------------------------------------");
+        Console.WriteLine($"Date: {results.Date}");
+        Console.WriteLine($"Total Guests: {results.TotalGuests}");
+        Console.WriteLine($"Food waste cost: {results.FoodWasteCost}");
     }
 }

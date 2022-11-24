@@ -40,8 +40,6 @@ public class BuffetService : IBuffetService
                 _currentPortions.Add(portion);
             }
         }
-
-        Reset();
     }
 
     public void Reset()

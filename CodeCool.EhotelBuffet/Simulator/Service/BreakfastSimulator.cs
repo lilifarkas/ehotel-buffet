@@ -40,41 +40,41 @@ public class BreakfastSimulator : IDiningSimulator
         ResetState();
         IRefillStrategy refillStrategy = new BasicRefillStrategy();
         DateTime currentTime = config.Start;
-        
-        Console.WriteLine($"current time: {currentTime}");
-        
+
         IEnumerable<Guest> guests = _reservationManager.GetGuestsForDate(currentTime);
         
         var enumerable = guests as Guest[] ?? guests.ToArray();
         int maxGuestsPerGrp = enumerable.Count() / config.MinimumGroupCount;
         var guestGroups = _guestGroupProvider.SplitGuestsIntoGroups(enumerable, config.MinimumGroupCount, maxGuestsPerGrp);
-        
+
         foreach (var guestGroup in guestGroups)
         {
-            // foreach (var guestGroupGuest in guestGroup.Guests)
-            // {
-            //     Console.WriteLine($"Group ID: {guestGroup.Id}, Guest name: {guestGroupGuest.Name}, Meal preference: {guestGroupGuest.MealPreferences}");
-            // }
-            // Console.WriteLine($"ID: {guestGroup.Id}");
-            // _buffetService.Refill(refillStrategy);
-            // foreach (var guestGroupGuest in guestGroup.Guests)
-            // {
-            //     
-            //     foreach (var mealPreference in guestGroupGuest.MealPreferences)
-            //     {
-            //         if (_buffetService.Consume(mealPreference))
-            //         {
-            //             Console.WriteLine($"Guest: {guestGroupGuest}, consumed: {mealPreference}");
-            //         }
-            //         else
-            //         {
-            //             Console.WriteLine($"Unhappy guest: {guestGroupGuest}");
-            //         }
-            //     }
-            // }
+            _buffetService.Refill(refillStrategy);
+            foreach (var guestGroupGuest in guestGroup.Guests)
+            {
+                
+                foreach (var mealPreference in guestGroupGuest.MealPreferences)
+                {
+                    Console.WriteLine(mealPreference.);
+                    if (_buffetService.Consume(mealPreference))
+                    {
+                        if (!_happyGuests.Contains(guestGroupGuest))
+                        {
+                            _happyGuests.Add(guestGroupGuest);
+                        }
+                    }
+                    else
+                    {
+                        if (!_unhappyGuests.Contains(guestGroupGuest))
+                        {
+                            _unhappyGuests.Add(guestGroupGuest);
+                        }
+                    }
+                }
+            }
         }
-        Console.WriteLine();
-        return null;
+
+        return new DiningSimulationResults(currentTime, enumerable.Count(), _buffetService.CollectWaste(MealDurability.Short, currentTime), _happyGuests, _unhappyGuests);;
     }
 
     private void ResetState()
