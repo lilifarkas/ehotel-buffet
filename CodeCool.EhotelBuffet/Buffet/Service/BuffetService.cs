@@ -21,7 +21,6 @@ public class BuffetService : IBuffetService
 
     public void Refill(IRefillStrategy refillStrategy)
     {
-        
         if (!_isInitialized)
         {
             IEnumerable<MenuItem> menu = _menuProvider.MenuItems;
@@ -48,6 +47,7 @@ public class BuffetService : IBuffetService
     public void Reset()
     {
         _isInitialized = false;
+        
     }
 
     public bool Consume(MealType mealType)
@@ -75,6 +75,11 @@ public class BuffetService : IBuffetService
             }
             
             _currentPortions.Remove(freshestMeal);
+            foreach (var asd in _currentPortions)
+            {
+                Console.WriteLine(asd);
+            }
+            Console.WriteLine("??????????????");
             return true;
         }
         return false;
@@ -103,6 +108,7 @@ public class BuffetService : IBuffetService
         {
             _currentPortions.Remove(portion);
         }
+        
         return cost;
     }
 }

@@ -1,11 +1,13 @@
 ﻿using System.Diagnostics.Metrics;
 using CodeCool.EhotelBuffet.Menu.Model;
+using CodeCool.EhotelBuffet.Menu.Service;
 
 namespace CodeCool.EhotelBuffet.Refill.Service;
 
 public class BasicRefillStrategy : IRefillStrategy
 {
     private const int OptimalPortionCount = 3;
+    
 
     public Dictionary<MenuItem, int> GetInitialQuantities(IEnumerable<MenuItem> menuItems)
     {
@@ -22,18 +24,18 @@ public class BasicRefillStrategy : IRefillStrategy
     {
         var enumerable = currentPortions.ToList();
         var needRefill = new Dictionary<MenuItem, int>();
+        MenuProvider menuProvider = new MenuProvider();
+        IEnumerable<MenuItem> menu = menuProvider.MenuItems;
         
-        foreach (var x in enumerable)
+        foreach (var item in menu)
         {
-            if (enumerable.Count(portion => portion.MenuItem.MealType == x.MenuItem.MealType) < 3)
+            if (enumerable.Count(portion => portion.MenuItem.MealType == item.MealType) < 3)
             {
-                needRefill.Add(x.MenuItem,
+                needRefill.Add(item,
                     (OptimalPortionCount -
-                     enumerable.Count(portion => portion.MenuItem.MealType == x.MenuItem.MealType)));
+                     enumerable.Count(portion => portion.MenuItem.MealType == item.MealType)));
             }
         }
-
         return needRefill;
     }
-
 }
