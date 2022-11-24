@@ -75,11 +75,6 @@ public class BuffetService : IBuffetService
             }
             
             _currentPortions.Remove(freshestMeal);
-            foreach (var asd in _currentPortions)
-            {
-                Console.WriteLine(asd);
-            }
-            Console.WriteLine("??????????????");
             return true;
         }
         

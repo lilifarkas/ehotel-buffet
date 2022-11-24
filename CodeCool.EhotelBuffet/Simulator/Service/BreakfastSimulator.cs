@@ -40,16 +40,40 @@ public class BreakfastSimulator : IDiningSimulator
         ResetState();
         IRefillStrategy refillStrategy = new BasicRefillStrategy();
         DateTime currentTime = config.Start;
+        
+        Console.WriteLine($"current time: {currentTime}");
+        
         IEnumerable<Guest> guests = _reservationManager.GetGuestsForDate(currentTime);
+        
         var enumerable = guests as Guest[] ?? guests.ToArray();
         int maxGuestsPerGrp = enumerable.Count() / config.MinimumGroupCount;
-
-        if (maxGuestsPerGrp > 0)
+        var guestGroups = _guestGroupProvider.SplitGuestsIntoGroups(enumerable, config.MinimumGroupCount, maxGuestsPerGrp);
+        
+        foreach (var guestGroup in guestGroups)
         {
-            var guestGroups = _guestGroupProvider.SplitGuestsIntoGroups(enumerable, config.MinimumGroupCount, maxGuestsPerGrp);
-
+            // foreach (var guestGroupGuest in guestGroup.Guests)
+            // {
+            //     Console.WriteLine($"Group ID: {guestGroup.Id}, Guest name: {guestGroupGuest.Name}, Meal preference: {guestGroupGuest.MealPreferences}");
+            // }
+            // Console.WriteLine($"ID: {guestGroup.Id}");
+            // _buffetService.Refill(refillStrategy);
+            // foreach (var guestGroupGuest in guestGroup.Guests)
+            // {
+            //     
+            //     foreach (var mealPreference in guestGroupGuest.MealPreferences)
+            //     {
+            //         if (_buffetService.Consume(mealPreference))
+            //         {
+            //             Console.WriteLine($"Guest: {guestGroupGuest}, consumed: {mealPreference}");
+            //         }
+            //         else
+            //         {
+            //             Console.WriteLine($"Unhappy guest: {guestGroupGuest}");
+            //         }
+            //     }
+            // }
         }
-        _buffetService.Refill(refillStrategy);
+        Console.WriteLine();
         return null;
     }
 

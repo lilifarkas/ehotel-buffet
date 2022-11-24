@@ -15,7 +15,7 @@ public class ReservationProvider : IReservationProvider
 
         //Create DateTime objects from calculated dates.
         DateTime startDate = new DateTime(seasonStart.Year, seasonStart.Month, stayStartDate);
-        DateTime endDate = new DateTime(seasonStart.Year, seasonStart.Month, stayStartDate + stayLength);
+        DateTime endDate = new DateTime(seasonStart.Year, seasonStart.Month, stayStartDate + stayLength, 10 ,0 ,0);
         
         return new Reservation(startDate, endDate, guest);
     }

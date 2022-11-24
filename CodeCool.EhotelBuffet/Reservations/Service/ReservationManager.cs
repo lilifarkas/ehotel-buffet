@@ -25,6 +25,7 @@ public class ReservationManager : IReservationManager
         {
             if (reservation.Start <= date && reservation.End >= date)
             {
+                Console.WriteLine($"Start: {reservation.Start}, End: {reservation.End}");
                 //Add guests whose stay falls on to the date parameter
                 guestsOnDate.Add(reservation.Guest);
             }
