@@ -39,14 +39,15 @@ public class BreakfastSimulator : IDiningSimulator
     {
         ResetState();
         IRefillStrategy refillStrategy = new BasicRefillStrategy();
-        DateTime currentTime = config.Start;
+        DateTime currentTime = _timeService.SetCurrentTime(config.Start);
 
         IEnumerable<Guest> guests = _reservationManager.GetGuestsForDate(currentTime);
         
         var enumerable = guests as Guest[] ?? guests.ToArray();
         int maxGuestsPerGrp = enumerable.Count() / config.MinimumGroupCount;
         var guestGroups = _guestGroupProvider.SplitGuestsIntoGroups(enumerable, config.MinimumGroupCount, maxGuestsPerGrp);
-
+        
+        
         foreach (var guestGroup in guestGroups)
         {
             _buffetService.Refill(refillStrategy);
@@ -55,7 +56,7 @@ public class BreakfastSimulator : IDiningSimulator
                 
                 foreach (var mealPreference in guestGroupGuest.MealPreferences)
                 {
-                    Console.WriteLine(mealPreference.);
+                    
                     if (_buffetService.Consume(mealPreference))
                     {
                         if (!_happyGuests.Contains(guestGroupGuest))
@@ -71,10 +72,16 @@ public class BreakfastSimulator : IDiningSimulator
                         }
                     }
                 }
+                
             }
+                _timeService.IncreaseCurrentTime(config.CycleLengthInMinutes);
+                _foodWasteCost += _buffetService.CollectWaste(MealDurability.Short, _timeService.GetCurrentTime());
+                _foodWasteCost += _buffetService.CollectWaste(MealDurability.Medium, _timeService.GetCurrentTime());
+                _foodWasteCost += _buffetService.CollectWaste(MealDurability.Long, _timeService.GetCurrentTime());
         }
-
-        return new DiningSimulationResults(currentTime, enumerable.Count(), _buffetService.CollectWaste(MealDurability.Short, currentTime), _happyGuests, _unhappyGuests);;
+        Console.WriteLine(_foodWasteCost);
+        int waste = _foodWasteCost;
+        return new DiningSimulationResults(currentTime, enumerable.Count(), waste, _happyGuests, _unhappyGuests);
     }
 
     private void ResetState()

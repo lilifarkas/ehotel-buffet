@@ -45,7 +45,7 @@ public class BuffetService : IBuffetService
     public void Reset()
     {
         _isInitialized = false;
-        
+        _currentPortions.Clear();
     }
 
     public bool Consume(MealType mealType)
@@ -91,7 +91,7 @@ public class BuffetService : IBuffetService
             if (portion.MenuItem.MealDurability == mealDurability)
             {
                 durabilityInMins = portion.MenuItem.MealDurabilityInMinutes;
-                if ((currentDate - portion.TimeStamp).TotalMinutes > durabilityInMins)
+                if ((currentDate - portion.TimeStamp).TotalMinutes >= durabilityInMins)
                 {
                     cost += portion.MenuItem.Cost;
                     removedItems.Add(portion);
