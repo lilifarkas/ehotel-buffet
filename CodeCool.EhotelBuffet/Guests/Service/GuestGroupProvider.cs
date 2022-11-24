@@ -30,8 +30,15 @@ public class GuestGroupProvider: IGuestGroupProvider
             }
         }
         GuestGroup[] arrayOfGuests = randomGroups.ToArray();
-
-        
+        Console.WriteLine($"maximum per group: {maxGuestPerGroup}, group count: {groupCount}, guest list length: {guests.Count()}");
+        foreach (var arrayOfGuest in arrayOfGuests)
+        {
+            Console.WriteLine($"group id: {arrayOfGuest.Id}");
+            foreach (var guest in arrayOfGuest.Guests)
+            {
+                Console.WriteLine(guest);
+            }
+        }
 
         return arrayOfGuests;
     }
@@ -42,8 +49,7 @@ public class GuestGroupProvider: IGuestGroupProvider
         var random = new Random();
         var guestsToArray = guests as Guest[] ?? guests.ToArray();
         var randomGuests = new List<Guest>();
-        var randomNumberGuestsPerGroup = random.Next(1, max);
-        for (int i = 0; i < randomNumberGuestsPerGroup; i++)
+        for (int i = 0; i < max; i++)
         {
             var randomGuest = guestsToArray[random.Next(guestsToArray.Length)];
             if (!randomGuests.Contains(randomGuest))

@@ -40,7 +40,7 @@ public class EhoteBuffetUi
             Console.WriteLine(guest);
         }
         CreateReservations(guests, seasonStart, seasonEnd);
-        Console.WriteLine("Reservations:");
+
         PrintGuestsWithReservations();
 
 
