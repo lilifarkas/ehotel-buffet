@@ -30,7 +30,9 @@ public class GuestGroupProvider: IGuestGroupProvider
             }
         }
         GuestGroup[] arrayOfGuests = randomGroups.ToArray();
+
         
+
         return arrayOfGuests;
     }
 

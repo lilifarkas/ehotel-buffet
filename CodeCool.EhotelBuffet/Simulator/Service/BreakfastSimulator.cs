@@ -2,6 +2,7 @@
 using CodeCool.EhotelBuffet.Guests.Model;
 using CodeCool.EhotelBuffet.Guests.Service;
 using CodeCool.EhotelBuffet.Menu.Model;
+using CodeCool.EhotelBuffet.Menu.Service;
 using CodeCool.EhotelBuffet.Refill.Service;
 using CodeCool.EhotelBuffet.Reservations.Service;
 using CodeCool.EhotelBuffet.Simulator.Model;
@@ -37,9 +38,33 @@ public class BreakfastSimulator : IDiningSimulator
     public DiningSimulationResults Run(DiningSimulatorConfig config)
     {
         ResetState();
+        IRefillStrategy refillStrategy = new BasicRefillStrategy();
         DateTime currentTime = config.Start;
         IEnumerable<Guest> guests = _reservationManager.GetGuestsForDate(currentTime);
+        var enumerable = guests as Guest[] ?? guests.ToArray();
+        foreach (var guest in enumerable)
+        {
+            Console.WriteLine("Guests: " + guest);
+        }
+        int maxGuestsPerGrp = enumerable.Count() / config.MinimumGroupCount;
         
+        Console.WriteLine("Guest groups: ");
+        if (maxGuestsPerGrp > 0)
+        {
+            var guestGroups = _guestGroupProvider.SplitGuestsIntoGroups(enumerable, config.MinimumGroupCount, maxGuestsPerGrp);
+            
+            foreach (var guestGroup in guestGroups)
+            {
+                Console.WriteLine(guestGroup);
+                foreach (var guestGroupGuest in guestGroup.Guests)
+                {
+                    Console.WriteLine(guestGroupGuest);
+                }
+            }
+            
+        }
+        _buffetService.Refill(refillStrategy);
+        Console.WriteLine("------------------------------------------------------");
         return null;
     }
 

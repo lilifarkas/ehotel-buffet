@@ -11,8 +11,8 @@ public class ReservationProvider : IReservationProvider
         //Generate a random start stay date
         int stayStartDate = rnd.Next(seasonStart.Day, seasonEnd.Day);
         //Generate random stay length, stayStartDate + stayLength can't exceed seasonEnd.
-        int stayLength = rnd.Next(1, seasonEnd.Day - stayStartDate);
-        
+        int stayLength = rnd.Next(1, (seasonEnd.Day - stayStartDate) + 1);
+
         //Create DateTime objects from calculated dates.
         DateTime startDate = new DateTime(seasonStart.Year, seasonStart.Month, stayStartDate);
         DateTime endDate = new DateTime(seasonStart.Year, seasonStart.Month, stayStartDate + stayLength);

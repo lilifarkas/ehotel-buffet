@@ -40,16 +40,14 @@ public class BuffetService : IBuffetService
                 _currentPortions.Add(portion);
             }
         }
-        foreach (var asd in _currentPortions)
-        {
-            Console.WriteLine(asd);
-        }
-        Console.WriteLine("------------------------");
+
+        Reset();
     }
 
     public void Reset()
     {
         _isInitialized = false;
+        
     }
 
     public bool Consume(MealType mealType)
@@ -112,11 +110,7 @@ public class BuffetService : IBuffetService
         {
             _currentPortions.Remove(portion);
         }
-        foreach (var asd in _currentPortions)
-        {
-            Console.WriteLine(asd);
-        }
-        Console.WriteLine(".........................");
+        
         return cost;
     }
 }

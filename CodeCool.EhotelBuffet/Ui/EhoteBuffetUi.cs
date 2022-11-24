@@ -32,6 +32,7 @@ public class EhoteBuffetUi
         int guestCount = 20;
         DateTime seasonStart = DateTime.Today;
         DateTime seasonEnd = DateTime.Today.AddDays(3);
+
         Console.WriteLine("Guests:");
         var guests = GetGuests(guestCount);
         foreach (var guest in guests)
@@ -41,6 +42,7 @@ public class EhoteBuffetUi
         CreateReservations(guests, seasonStart, seasonEnd);
         Console.WriteLine("Reservations:");
         PrintGuestsWithReservations();
+
 
         var currentDate = seasonStart;
 
@@ -59,10 +61,11 @@ public class EhoteBuffetUi
 
         Console.ReadLine();
     }
-
+    
     private IEnumerable<Guest> GetGuests(int guestCount)
     {
         return _guestProvider.Provide(guestCount);
+
     }
 
     private void CreateReservations(IEnumerable<Guest> guests, DateTime seasonStart, DateTime seasonEnd)
@@ -77,6 +80,7 @@ public class EhoteBuffetUi
     {
         foreach (var reservation in _reservationManager.GetAll())
         {
+
             Console.WriteLine($"{reservation.Guest.Name} - " +
                               $"Start: " +
                               $"{reservation.Start}, " +
@@ -87,6 +91,7 @@ public class EhoteBuffetUi
 
         }
         
+
     }
 
     private static void PrintSimulationResults(DiningSimulationResults results)
