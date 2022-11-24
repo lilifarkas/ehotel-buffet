@@ -42,29 +42,14 @@ public class BreakfastSimulator : IDiningSimulator
         DateTime currentTime = config.Start;
         IEnumerable<Guest> guests = _reservationManager.GetGuestsForDate(currentTime);
         var enumerable = guests as Guest[] ?? guests.ToArray();
-        foreach (var guest in enumerable)
-        {
-            Console.WriteLine("Guests: " + guest);
-        }
         int maxGuestsPerGrp = enumerable.Count() / config.MinimumGroupCount;
-        
-        Console.WriteLine("Guest groups: ");
+
         if (maxGuestsPerGrp > 0)
         {
             var guestGroups = _guestGroupProvider.SplitGuestsIntoGroups(enumerable, config.MinimumGroupCount, maxGuestsPerGrp);
-            
-            foreach (var guestGroup in guestGroups)
-            {
-                Console.WriteLine(guestGroup);
-                foreach (var guestGroupGuest in guestGroup.Guests)
-                {
-                    Console.WriteLine(guestGroupGuest);
-                }
-            }
-            
+
         }
         _buffetService.Refill(refillStrategy);
-        Console.WriteLine("------------------------------------------------------");
         return null;
     }
 

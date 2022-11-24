@@ -32,13 +32,9 @@ public class EhoteBuffetUi
         int guestCount = 20;
         DateTime seasonStart = DateTime.Today;
         DateTime seasonEnd = DateTime.Today.AddDays(3);
-
-        Console.WriteLine("Guests:");
+        
         var guests = GetGuests(guestCount);
-        foreach (var guest in guests)
-        {
-            Console.WriteLine(guest);
-        }
+
         CreateReservations(guests, seasonStart, seasonEnd);
 
         PrintGuestsWithReservations();

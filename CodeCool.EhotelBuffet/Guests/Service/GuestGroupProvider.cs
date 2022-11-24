@@ -30,16 +30,6 @@ public class GuestGroupProvider: IGuestGroupProvider
             }
         }
         GuestGroup[] arrayOfGuests = randomGroups.ToArray();
-        Console.WriteLine($"maximum per group: {maxGuestPerGroup}, group count: {groupCount}, guest list length: {guests.Count()}");
-        foreach (var arrayOfGuest in arrayOfGuests)
-        {
-            Console.WriteLine($"group id: {arrayOfGuest.Id}");
-            foreach (var guest in arrayOfGuest.Guests)
-            {
-                Console.WriteLine(guest);
-            }
-        }
-
         return arrayOfGuests;
     }
 
